@@ -1,0 +1,88 @@
+///////////////////////////////////////////////////////////////
+//
+//  This is a class determine if two flows should be stitched
+//  together
+//
+//  Author:Sydney Lyon
+//  Date Started: 7/5/2016
+//  Last Worked: 7/5/2016
+//
+///////////////////////////////////////////////////////////////
+
+import java.util.ArrayList;
+
+public class Stitcher{
+  
+  private ArrayList<String[]> firstList;
+  private ArrayList<String[]> secondList;
+  private Reader readerOne, readerTwo;
+  
+  
+  
+  public Stitcher(String pathOne, String pathTwo){
+    
+    readerOne = new Reader(pathOne);
+    readerTwo = new Reader(pathTwo);
+    firstList = readerOne.run();
+    secondList = readerTwo.run();
+    
+  }
+  
+  // ToDo: compare() loops through both lists, finds if same flow
+  public void compare(){
+    String out = "";
+    for(int i=0; i<firstList.size(); i++){
+      for(int j=0; j<secondList.size(); j++){
+        if(firstList.get(i)[3].equals(secondList.get(j)[3])){ //sIP
+          if(firstList.get(i)[5].equals(secondList.get(j)[5])){ //sPort
+            if(firstList.get(i)[4].equals(secondList.get(j)[4])){ //dIP
+              if(firstList.get(i)[6].equals(secondList.get(j)[6])){ //dPort
+                if(firstList.get(i)[1].substring(0,9).equals(secondList.get(j)[0].substring(0,9))){ // date
+                  for(int k=0; k<18; k++){
+                    out += firstList.get(i)[k] + ", ";
+                  }
+                  out += "\n";
+                  for(int k=0; k<18; k++){
+                    out += secondList.get(j)[k] + ", ";
+                  }
+                  out += "\n";
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    System.out.println(out);
+  }
+  
+  // ToDo: addBytes() adds together bytes
+  
+  public String toString(){
+    String out = "";
+    
+    //out += "[";
+    for(int i=0; i<=0; i++){
+      if(true){
+      }
+    }
+    //out += firstList.size() + " and " + secondList.size();
+    
+    return out;
+  }
+  public static void main(String[] args){
+    
+    final long startTime = System.nanoTime();
+    Stitcher test = new Stitcher("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\01.csv",
+                             "C:\\Users\\sylyon\\Documents\\Java\\Stitching\\02.csv");
+    
+    test.compare();
+    System.out.println(test.toString());    
+    final long duration = System.nanoTime() - startTime;
+    System.out.println("" + duration/1000000000 + " sec");
+    
+  }
+  
+  
+  
+}
