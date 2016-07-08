@@ -26,7 +26,7 @@ public class Writer{
   }
   
   public void run(){
-    
+    write();
   }
   
   public String arrayToString(String[] input){
@@ -45,9 +45,9 @@ public class Writer{
     return out;
   }
   
+  
   public String listToString(){
     String out= "";
-    // ToDo: make a long string with the entire arrayList
     int len = list.size();
     for(int i=0; i<len; i++){
       out += arrayToString(list.get(i));
@@ -63,16 +63,19 @@ public class Writer{
     try {
         fw = new FileWriter(path + ".tmp", true);
         bw = new BufferedWriter(fw);
-        out = new PrintWriter(bw);
-        out.println(writeString);
-        out.close();
+        //out = new PrintWriter(bw);
+        //out.println(writeString);
+        //out.close();
+        
+        bw.write(writeString);
+        bw.flush();
     } catch (IOException e) {
         e.printStackTrace();
     }
     finally {
 
-        if(out != null)
-            out.close();
+        //if(out != null)
+            //out.close();
         
         try {
             if(bw != null)
@@ -90,9 +93,9 @@ public class Writer{
   }
   
   public static void main(String[] args){
-    Reader test1 = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\01.csv");
-    ArrayList<String[]> testList = test1.run();
-    Writer test2 = new Writer("temp", testList);
-    System.out.println(test2.listToString());
+    //Reader test1 = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\01.csv");
+    //ArrayList<String[]> testList = test1.run();
+    //Writer test2 = new Writer("temp", testList);
+    //System.out.println(test2.listToString());
   }
 }

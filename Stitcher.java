@@ -86,10 +86,10 @@ public class Stitcher{
     // run the comparison of our two arrayLists created by Reader class
     this.compare();
     // write the updated flow records into the file
-    //writerOne = new Writer(pathOne, firstList);
-    //writerOne.run();
-    //writerTwo = new Writer(pathTwo, secondList);
-    //writerTwo.run();
+    writerOne = new Writer(pathOne, firstList);
+    writerOne.write();
+    writerTwo = new Writer(pathTwo, secondList);
+    writerTwo.write();
     
   }
   
