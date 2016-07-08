@@ -104,7 +104,6 @@ public class Reader{
           linesWritten++;
         }
       }
-      pw.close();
       br.close();
       
       // This function allows the temp file to be renamed, essentially deleting the

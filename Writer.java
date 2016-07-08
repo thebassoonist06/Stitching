@@ -19,10 +19,12 @@ public class Writer{
   private ArrayList<String[]> list;
   private static final String NEW_LINE = "\n";
   private static final String COMMA = ",";
+  
     
   public Writer(String path, ArrayList<String[]> list){
     this.path = path;
     this.list = list;
+    
   }
   
   public void run(){
