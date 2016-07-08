@@ -26,11 +26,18 @@ public class FileWalker{
 //  }
   
   public void run(){
+    
     File dir = new File(path);
     File[] directoryListing = dir.listFiles();
+    File previous = null;
+    
     if (directoryListing != null) {
       for (File child : directoryListing) {
-        System.out.println(child);
+        if(child == null){
+          
+        }else{
+          //System.out.println(child);
+        }
       }
     } else {
       System.out.println("failed");
@@ -39,6 +46,8 @@ public class FileWalker{
       // to avoid race conditions with another process that deletes
       // directories.
     }
+    
+    
   }
   
   public static void main(String[] args){
