@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+
 public class Reader{
   
   private final String path;
@@ -30,15 +31,23 @@ public class Reader{
   // for CSV
   private static final String COMMA = ",";
   private static final String NEW_LINE = "\n";
+  // test numbers
+  int linesRead, linesSaved, linesWritten;
+  
   
   public Reader(String in){
-    
+    linesRead = linesSaved = linesWritten = 0;
     path = in;
     
   }
   
   
-  
+  public String testToString(){
+    String out= "----------------------------------------------\nReader Tests\n";
+    out += "linesRead: " + linesRead + "\nlinesSaved: " + linesSaved + "\nlinesWritten: " + linesWritten;
+    out += "\n----------------------------------------------";
+    return out;
+  }
   // Determines if the flow data needs to be saved
   // String should be whole flow entry from csv (one line)
   public boolean shouldSave(String in){
@@ -46,7 +55,7 @@ public class Reader{
     //This is the line of the csv file we are currently checking
     String input = in;
     // start and stop variables for the loops
-    int startMin=5;
+    int startMin = 5;
     int ceiling = 10;
     // creates an int array startMin long
     int[] index = new int[startMin];
@@ -68,40 +77,32 @@ public class Reader{
   
   
   public ArrayList<String[]> run(){
-    
     ArrayList<String[]> store = new ArrayList<String[]>();
-      
     try {
-      
       // These are for storing our information
       File inFile = new File(path);
       File tempFile = new File(path + ".tmp");
       PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
-      
       if(!inFile.isFile()){
         System.out.println("No such File");
         return store;
       }
-      
       // reads file and puts it into iterable BufferReader        
       br = new BufferedReader (new FileReader(path));
-    
       while((line = br.readLine()) != null){
-        //System.out.println(line);
         // When correct times are found parse and store csv data in array
+        linesRead++;
         if(shouldSave(line)){
-          //System.out.println("time found");
+          linesSaved++;
           // using comma as separator
           String[] flow = line.split(COMMA);
-          //System.out.println("flow split");
           store.add(flow);
-          //System.out.println("flow saved");
         }else{
           // "line" is the current string in the bufferReader
           pw.println(line);
           pw.flush();
+          linesWritten++;
         }
-        
       }
       pw.close();
       br.close();
@@ -134,7 +135,7 @@ public class Reader{
     final long startTime = System.nanoTime();
     Reader test = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\01.csv");
     System.out.println("" + test.run().size());
-    System.out.println(test.toString());
+    System.out.println(test.testToString());
     final long duration = System.nanoTime() - startTime;
     System.out.println(duration/1000000000 + " sec");
     

@@ -1,0 +1,87 @@
+///////////////////////////////////////////////////////////////
+//
+//  This is a class writes stitched results from array to a file
+//
+//  Author:Sydney Lyon
+//  Date Started: 7/7/2016
+//  Last Worked: 7/7/2016
+//
+///////////////////////////////////////////////////////////////
+
+import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+
+public class Writer{
+  private String pathOne, pathTwo;
+  private ArrayList<String[]> listOne, listTwo;
+  private static final String NEW_LINE = "\n";
+  private static final String COMMA = ",";
+    
+  public Writer(String pathOne, ArrayList<String[]> listOne,
+                String pathTwo, ArrayList<String[]> listTwo){
+    pathOne = pathOne;
+    pathTwo = pathTwo;
+    listOne = listOne;
+    listTwo = listTwo;
+  }
+  
+  public void run(){
+    
+  }
+  
+  public String arrayToString(String[] input){
+    String[] in = input;
+    String out = "";
+    int size = in.length;
+    for(int i=0; i<=(size-1); i++){
+      if(i==0){
+        out += in[i];
+      }else{
+        out += COMMA + in[i];
+      }
+    }
+    out += NEW_LINE;
+  
+    return out;
+  }
+  
+  public void write(){
+    FileWriter fw = null;
+    BufferedWriter bw = null;
+    PrintWriter out = null;
+    try {
+        fw = new FileWriter("myfile.txt", true);
+        bw = new BufferedWriter(fw);
+        out = new PrintWriter(bw);
+        out.println("the text");
+        out.close();
+    } catch (IOException e) {
+        //exception handling left as an exercise for the reader
+    }
+    finally {
+
+        if(out != null)
+            out.close();
+        
+        try {
+            if(bw != null)
+                bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();//exception handling left as an exercise for the reader
+        }
+        try {
+            if(fw != null)
+                fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();//exception handling left as an exercise for the reader
+        }
+    }
+  }
+  
+  public static void main(String[] args){
+    
+  }
+}
