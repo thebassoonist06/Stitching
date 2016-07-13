@@ -6,7 +6,7 @@
 //
 //  Author:Sydney Lyon
 //  Date Started: 7/1/2016
-//  Last Worked: 7/5/2016
+//  Last Worked: 7/12/2016
 //
 ///////////////////////////////////////////////////////////////
 
@@ -73,7 +73,21 @@ public class Reader{
     return false;
   }
   
-  
+  public String newPath(){
+    String out = "";
+    String seperator = "\\";
+    out += "C:\\Users\\sylyon\\Documents\\STITCHED";
+    String date = path.substring(path.length() - 15);
+    String year = date.substring(1,5);
+    String month = date.substring(6,8);
+    String day = date.substring(date.length() - 6);
+    // changes to the appropriate path
+    out += seperator + year + seperator + month + seperator;
+    // changes to the appropriate file name
+    out += year + "-" + month + "-" + day;
+    
+    return out;
+  }
   
   
   public ArrayList<String[]> run(){
@@ -81,8 +95,8 @@ public class Reader{
     try {
       // These are for storing our information
       File inFile = new File(path);
-      File tempFile = new File(path + ".tmp");
-      PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+      File outFile = new File(newPath());
+      PrintWriter pw = new PrintWriter(new FileWriter(outFile));
       if(!inFile.isFile()){
         System.out.println("No such File");
         return store;
@@ -105,13 +119,7 @@ public class Reader{
         }
       }
       br.close();
-      
-      // This function allows the temp file to be renamed, essentially deleting the
-      // records of flows that need to be further analyzed and rewritten later ***************************************
-      // inFile.delete();
-      if(!tempFile.renameTo(inFile))
-        System.out.println("Couldn't rename file");
-      
+                  
     }catch(FileNotFoundException e){
       e.printStackTrace();
     }catch(IOException e){
@@ -133,9 +141,10 @@ public class Reader{
   public static void main(String[] args){
     
     final long startTime = System.nanoTime();
-    Reader test = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\01.csv");
+    Reader test = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\2016\\01\\01.csv");
     System.out.println("" + test.run().size());
     System.out.println(test.testToString());
+    System.out.println(test.newPath());
     final long duration = System.nanoTime() - startTime;
     System.out.println(duration/1000000000 + " sec");
     

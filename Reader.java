@@ -96,6 +96,7 @@ public class Reader{
       // These are for storing our information
       File inFile = new File(path);
       File outFile = new File(newPath());
+      outFile.getParentFile().mkdirs();
       PrintWriter pw = new PrintWriter(new FileWriter(outFile));
       if(!inFile.isFile()){
         System.out.println("No such File");
