@@ -6,7 +6,7 @@
 //
 //  Author:Sydney Lyon
 //  Date Started: 7/1/2016
-//  Last Worked: 7/5/2016
+//  Last Worked: 7/12/2016
 //
 ///////////////////////////////////////////////////////////////
 
@@ -73,7 +73,21 @@ public class Reader{
     return false;
   }
   
-  
+  public String newPath(){
+    String out = "";
+    String seperator = "\\";
+    out += "C:\\Users\\sylyon\\Documents\\STITCHED";
+    String date = path.substring(path.length() - 15);
+    String year = date.substring(1,5);
+    String month = date.substring(6,8);
+    String day = date.substring(date.length() - 6);
+    // changes to the appropriate path
+    out += seperator + year + seperator + month + seperator;
+    // changes to the appropriate file name
+    out += year + "-" + month + "-" + day;
+    
+    return out;
+  }
   
   
   public ArrayList<String[]> run(){
@@ -81,8 +95,8 @@ public class Reader{
     try {
       // These are for storing our information
       File inFile = new File(path);
-      File tempFile = new File(path + ".tmp");
-      PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+      File outFile = new File(newPath());
+      PrintWriter pw = new PrintWriter(new FileWriter(outFile));
       if(!inFile.isFile()){
         System.out.println("No such File");
         return store;
@@ -105,13 +119,7 @@ public class Reader{
         }
       }
       br.close();
-      
-      // This function allows the temp file to be renamed, essentially deleting the
-      // records of flows that need to be further analyzed and rewritten later ***************************************
-      // inFile.delete();
-      if(!tempFile.renameTo(inFile))
-        System.out.println("Couldn't rename file");
-      
+                  
     }catch(FileNotFoundException e){
       e.printStackTrace();
     }catch(IOException e){
@@ -125,6 +133,7 @@ public class Reader{
         }
       }
     }
+    //System.out.println(this.testToString());
     return store;
   }    
     
@@ -132,71 +141,13 @@ public class Reader{
   public static void main(String[] args){
     
     final long startTime = System.nanoTime();
-    Reader test = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\01.csv");
+    Reader test = new Reader("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\2016\\01\\01.csv");
     System.out.println("" + test.run().size());
     System.out.println(test.testToString());
+    System.out.println(test.newPath());
     final long duration = System.nanoTime() - startTime;
     System.out.println(duration/1000000000 + " sec");
     
   }
   
 }
-
-
-
-
-/*
- * I need somthing in main file that will cycle through the different day files
- * and send them to the reader.  I'll need to account for the different number of
- * days in a month and for leap years. (if year is divisible by 4 but not 100)
- * 
- * 
- *    ///////////////// Tests: copy/paste into class //////////////////////////////////
- * 
-    
-  // tests are in bottom comments
-  public String toString(){
-    String out = "";
-        
-    // shouldSave() tests
-    String test1 = "2015-11-30 23:59:14,2015-11-30 23:59:27,12.971,158.210.220.206,198.118.194.40,59381,62917,TCP,.A....,0,0,1800,100200,0,0,559,669,18127,1701";
-    String test2 = "2015-12-01 23:59:11,2015-12-02 16:47:35,60504.134,128.252.155.29,163.221.156.231,33001,54679,UDP,......,0,0,827547850,1228001601800,0,0,669,559,25887,2500";
-    String test3 = "2015-12-02 17:43:47,2015-12-02 20:54:58,11470.763,130.14.250.7,137.132.19.118,50062,33936,TCP,.A....,0,8,67345050,101017575000,0,0,669,559,70,7472";
-    if(this.shouldSave(test1)){
-      out += "true\n";
-    }else{
-      out += "false\n";
-    }
-    if(this.shouldSave(test2)){
-      out += "true\n";
-    }else{
-      out += "false\n";
-    }
-    if(this.shouldSave(test3)){
-      out += "true\n";
-    }else{
-      out += "false\n";
-    }
-    
-    
-    // test run()
-    ArrayList<String[]> test = run();
-    int testListSize = test.size();
-    int testArraySize = 18;
-    
-    for(int i=0; i<testListSize; i++){
-      for(int j=0; j<testArraySize; j++){
-        if(j == 0){
-          out += test.get(i)[j];
-        }else{
-          out += COMMA + test.get(i)[j];
-        }
-      }
-      out += NEW_LINE;
-    }
-    
-    
-    return out;
-  }
- * 
- */

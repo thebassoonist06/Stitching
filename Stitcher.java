@@ -5,7 +5,7 @@
 //
 //  Author:Sydney Lyon
 //  Date Started: 7/5/2016
-//  Last Worked: 7/6/2016
+//  Last Worked: 7/12/2016
 //
 ///////////////////////////////////////////////////////////////
 import java.text.DecimalFormat;
@@ -15,7 +15,7 @@ public class Stitcher{
   
   private ArrayList<String[]> firstList;
   private ArrayList<String[]> secondList;
-  private Reader readerOne, readerTwo;
+  private Reader readerOne, readerTwo = null;
   private Writer writerOne, writerTwo;
   // for CSV
   private static final String COMMA = ",";
@@ -88,9 +88,14 @@ public class Stitcher{
     // write the updated flow records into the file
     writerOne = new Writer(pathOne, firstList);
     writerOne.write();
-    writerTwo = new Writer(pathTwo, secondList);
-    writerTwo.write();
     
+//    writerTwo = new Writer(pathTwo, secondList);
+//    writerTwo.write();
+    
+  }
+  
+  public ArrayList<String[]> getList(){
+    return secondList;
   }
   
   // adds together the bytes column of our flow arrays
@@ -105,12 +110,13 @@ public class Stitcher{
   
   public String testToString(){
     
-    System.out.println(readerOne.testToString());
+    if(readerOne != null)System.out.println(readerOne.testToString());
     System.out.println(readerTwo.testToString());
     
-    String out= "**********************************************\nStitcher Tests\n";
+    String out = "";
+    out += "**********************************************\nStitcher Tests\n";
     out += "listOneLength: " + l1 + "\nlistTwoLength: " + l2 + "\nstitchedTotal: " + stitchedTotal;
-    out+= "\n**********************************************";
+    out += "\n**********************************************";
     return out;
   }
   

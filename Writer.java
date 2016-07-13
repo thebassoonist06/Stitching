@@ -4,7 +4,7 @@
 //
 //  Author:Sydney Lyon
 //  Date Started: 7/7/2016
-//  Last Worked: 7/7/2016
+//  Last Worked: 7/12/2016
 //
 ///////////////////////////////////////////////////////////////
 
@@ -60,7 +60,7 @@ public class Writer{
   public void write(){
     FileWriter fw = null;
     BufferedWriter bw = null;
-    PrintWriter out = null;
+    //PrintWriter out = null;
     String writeString = listToString();
     try {
         fw = new FileWriter(path + ".tmp", true);
