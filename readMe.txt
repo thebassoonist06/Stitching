@@ -1,5 +1,5 @@
 Author: Sydney Lyon
-Release 1.0 7/18/2016
+Version: 1.0 7/18/2016
 
 INTRO
 --------
