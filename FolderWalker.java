@@ -5,11 +5,7 @@
 //
 //  Author:Sydney Lyon
 //  Date Started: 7/7/2016
-<<<<<<< HEAD
 //  Last Worked: 7/20/2016
-=======
-//  Last Worked: 7/18/2016
->>>>>>> master
 //
 ///////////////////////////////////////////////////////////////
 
@@ -25,25 +21,14 @@ public class FolderWalker{
   private String[] directory;
   private String[] files;
   private int size1, size2, filesCopied;
-  //private FileWalker fileWalker;
-  private String path1 = "";
-  private String path2 = "";
-<<<<<<< HEAD
   private String separator = "";
     
   public FolderWalker(String path, String newPath){
     this.path = path;
     this.newPath = newPath;
     this.separator = File.separator;
-=======
-  private String seperator = "";
-    
-  public FolderWalker(String path, String newPath, String seperator){
-    this.path = path;
-    this.newPath = newPath;
-    this.seperator = seperator;
->>>>>>> master
     directory = null;
+    files = null;
     filesCopied = size1 = size2 = 0;
   }
   
@@ -59,15 +44,9 @@ public class FolderWalker{
   // opens all the folders that were collected in the parent folder
   public void openFolders(){
     for(String dir : directory){
-<<<<<<< HEAD
       getFiles(path + separator + dir);
       for(String fi : files){
         String old = path + separator + dir + separator + fi;
-=======
-      getFiles(path + seperator + dir);
-      for(String fi : files){
-        String old = path + seperator + dir + seperator + fi;
->>>>>>> master
         copyFile(old);
         filesCopied++;
       }
@@ -103,12 +82,8 @@ public class FolderWalker{
     String month = date.substring(6,8);
     String day = date.substring(date.length() - 6);
     // changes to the appropriate file name
-<<<<<<< HEAD
     out += separator + year + "-" + month + "-" + day;
-=======
-    out += seperator + year + "-" + month + "-" + day;
->>>>>>> master
-    
+
     return out;
   }
   
@@ -138,11 +113,7 @@ public class FolderWalker{
     getFiles(newPath);
     System.out.println("-----------------------------------------------");
     for(String fi : files){
-<<<<<<< HEAD
       String oldName = newPath + separator + fi;
-=======
-      String oldName = newPath + seperator + fi;
->>>>>>> master
       if(oldName.substring(oldName.length() - 5).equals(".temp")){
         File temp = new File(oldName);
         String newName = oldName.substring(0, oldName.length() - 5);
@@ -166,11 +137,7 @@ public class FolderWalker{
     // in this new filewalker object, the first path is the folder you want to stitch together
     // the second path is where you want the stitched files to go
     FolderWalker fw = new FolderWalker("C:\\Users\\sylyon\\Documents\\Java\\Stitching\\2016",
-<<<<<<< HEAD
                                        "C:\\Users\\sylyon\\Documents\\STITCHED");
-=======
-                                       "C:\\Users\\sylyon\\Documents\\STITCHED", "\\");
->>>>>>> master
     fw.run();
     //System.out.println(fw.getLastPath());
     final long duration = System.nanoTime() - startTime;
