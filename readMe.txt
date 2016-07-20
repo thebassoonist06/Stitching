@@ -1,5 +1,5 @@
 Author: Sydney Lyon
-Version: 1.0 7/18/2016
+Version: 1.01 7/20/2016
 
 INTRO
 --------
@@ -32,10 +32,9 @@ Writer
 
 USE
 -----
-New FolderWalker should be created with three String inputs: source directory, destination 
-directory, and the type of file seperator for your system ("\\", "\/").  You will also need to
-use the method FolderWalker.run().  If the naming structure is as described in the FUNCTIONALITY
-section, all files will be copied and stitched.
+New FolderWalker should be created with two String inputs: source directory and destination 
+directory.  You will also need to use the method FolderWalker.run().  If the naming structure
+is as described in the FUNCTIONALITY section, all files will be copied and stitched.
 
 If you already all the files that need to be stitched in one directory, you can simply use the
 FileWalker class.  To do this, create a new FileWalker with one String input: source directory.
@@ -44,3 +43,7 @@ After using the method FileWalker.run(), files will be stitched together.
 WARNING: If you only use FileWalker, the flow files will be overwritten when they are stitched
 together.  It is recommended that you do not use this on your original flow files, but create a
 copy and stitch those.
+
+CHANGE LOG
+-----------
+Update 1.01 - 7/20/2016 Implemented use of File.separator instead of using input
